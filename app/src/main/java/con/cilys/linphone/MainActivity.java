@@ -11,22 +11,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
 import org.linphone.core.Address;
-import org.linphone.core.Call;
 import org.linphone.core.CallParams;
 import org.linphone.core.Core;
 import org.linphone.core.CoreListenerStub;
 import org.linphone.core.ProxyConfig;
 import org.linphone.core.RegistrationState;
-import org.linphone.core.tools.Log;
 
 import java.util.ArrayList;
+
+import con.cilys.linphone.utils.L;
 
 public class MainActivity extends Activity {
     private ImageView mLed;
@@ -150,7 +147,7 @@ public class MainActivity extends Activity {
             int requestCode, String[] permissions, int[] grantResults) {
         // Callback for when permissions are asked to the user
         for (int i = 0; i < permissions.length; i++) {
-            Log.i(
+            L.i(
                     "[Permission] "
                             + permissions[i]
                             + " is "
@@ -187,24 +184,24 @@ public class MainActivity extends Activity {
         int recordAudio =
                 getPackageManager()
                         .checkPermission(Manifest.permission.RECORD_AUDIO, getPackageName());
-        Log.i(
+        L.i(
                 "[Permission] Record audio permission is "
                         + (recordAudio == PackageManager.PERMISSION_GRANTED
                         ? "granted"
                         : "denied"));
         int camera =
                 getPackageManager().checkPermission(Manifest.permission.CAMERA, getPackageName());
-        Log.i(
+        L.i(
                 "[Permission] Camera permission is "
                         + (camera == PackageManager.PERMISSION_GRANTED ? "granted" : "denied"));
 
         if (recordAudio != PackageManager.PERMISSION_GRANTED) {
-            Log.i("[Permission] Asking for record audio");
+            L.i("[Permission] Asking for record audio");
             permissionsList.add(Manifest.permission.RECORD_AUDIO);
         }
 
         if (camera != PackageManager.PERMISSION_GRANTED) {
-            Log.i("[Permission] Asking for camera");
+            L.i("[Permission] Asking for camera");
             permissionsList.add(Manifest.permission.CAMERA);
         }
 

@@ -12,7 +12,6 @@ public class LauncherActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_launcher);
-
     }
 
     @Override
@@ -26,7 +25,17 @@ public class LauncherActivity extends Activity {
             // If it's not, let's start it
             startService(new Intent().setClass(this, LinphoneService.class));
             // And wait for it to be ready, so we can safely use it afterwards
-            new ServiceWaitThread().start();
+            final Handler mHandler = new Handler();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (!LinphoneService.isReady()) {
+                        mHandler.postDelayed(this, 30);
+                    } else {
+                        onServiceReady();
+                    }
+                }
+            }, 30);
         }
     }
 
@@ -44,26 +53,5 @@ public class LauncherActivity extends Activity {
         startActivity(intent);
 
         finish();
-    }
-
-    // This thread will periodically check if the Service is ready, and then call onServiceReady
-    private class ServiceWaitThread extends Thread {
-        public void run() {
-            while (!LinphoneService.isReady()) {
-                try {
-                    sleep(30);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException("waiting thread sleep() has been interrupted");
-                }
-            }
-            // As we're in a thread, we can't do UI stuff in it, must post a runnable in UI thread
-            new Handler().post(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            onServiceReady();
-                        }
-                    });
-        }
     }
 }

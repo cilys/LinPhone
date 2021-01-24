@@ -56,10 +56,6 @@ public class ConfigureAccountActivity extends Activity {
             public void onRegistrationStateChanged(Core core, ProxyConfig cfg, RegistrationState state, String message) {
                 if (state == RegistrationState.Ok) {
                     finish();
-
-
-
-
                 } else if (state == RegistrationState.Failed) {
                     Toast.makeText(ConfigureAccountActivity.this, "Failure: " + message, Toast.LENGTH_LONG).show();
                 }
@@ -117,11 +113,6 @@ public class ConfigureAccountActivity extends Activity {
 
 
         cfg.setServerAddr("<sip:core1-hk.netustay.com;transport=udp>");
-
-        cfg.enablePublish(true);
-
-
-
 
         // Make sure the newly created one is the default
         LinphoneService.getCore().setDefaultProxyConfig(cfg);
