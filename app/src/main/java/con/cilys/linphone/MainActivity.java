@@ -23,9 +23,10 @@ import org.linphone.core.RegistrationState;
 
 import java.util.ArrayList;
 
+import con.cilys.linphone.base.BaseAc;
 import con.cilys.linphone.utils.L;
 
-public class MainActivity extends Activity {
+public class MainActivity extends BaseAc {
     private ImageView mLed;
     private CoreListenerStub mCoreListener;
 

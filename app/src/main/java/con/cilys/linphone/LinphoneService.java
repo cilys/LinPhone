@@ -86,6 +86,8 @@ public class LinphoneService extends Service {
                     // As it is the Service that is starting the activity, we have to give this flag
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
+
+
                 }
             }
         };

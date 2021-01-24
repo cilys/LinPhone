@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-public class LauncherActivity extends Activity {
+import con.cilys.linphone.base.BaseAc;
+
+public class LauncherActivity extends BaseAc {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

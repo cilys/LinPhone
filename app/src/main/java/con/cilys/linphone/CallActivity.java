@@ -1,7 +1,6 @@
 package con.cilys.linphone;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -19,7 +18,9 @@ import org.linphone.core.VideoDefinition;
 import org.linphone.core.tools.Log;
 import org.linphone.mediastream.Version;
 
-public class CallActivity extends Activity {
+import con.cilys.linphone.base.BaseAc;
+
+public class CallActivity extends BaseAc {
     // We use 2 TextureView, one for remote video and one for local camera preview
     private TextureView mVideoView;
     private TextureView mCaptureView;
@@ -153,8 +154,7 @@ public class CallActivity extends Activity {
             }
 
             RelativeLayout.LayoutParams newLp = new RelativeLayout.LayoutParams(width, height);
-            newLp.addRule(
-                    RelativeLayout.ALIGN_PARENT_BOTTOM,
+            newLp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,
                     1); // Clears the rule, as there is no removeRule until API 17.
             newLp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 1);
             mCaptureView.setLayoutParams(newLp);

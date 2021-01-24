@@ -1,14 +1,11 @@
 package con.cilys.linphone;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.Toast;
-
 
 import org.linphone.core.AccountCreator;
 import org.linphone.core.Core;
@@ -17,7 +14,9 @@ import org.linphone.core.ProxyConfig;
 import org.linphone.core.RegistrationState;
 import org.linphone.core.TransportType;
 
-public class ConfigureAccountActivity extends Activity {
+import con.cilys.linphone.base.BaseAc;
+
+public class ConfigureAccountActivity extends BaseAc {
     private EditText mUsername, mPassword, mDomain;
     private RadioGroup mTransport;
     private Button mConnect;
@@ -57,33 +56,18 @@ public class ConfigureAccountActivity extends Activity {
                 if (state == RegistrationState.Ok) {
                     finish();
                 } else if (state == RegistrationState.Failed) {
-                    Toast.makeText(ConfigureAccountActivity.this, "Failure: " + message, Toast.LENGTH_LONG).show();
+                    showToast("Failure: " + message);
                 }
             }
         };
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
 
         LinphoneService.getCore().addListener(mCoreListener);
     }
 
     @Override
-    protected void onPause() {
+    protected void onDestroy() {
         LinphoneService.getCore().removeListener(mCoreListener);
 
-        super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
         super.onDestroy();
     }
 
@@ -105,7 +89,6 @@ public class ConfigureAccountActivity extends Activity {
                 mAccountCreator.setTransport(TransportType.Tls);
                 break;
         }
-
 
 
         // This will automatically create the proxy config and auth info and add them to the Core
