@@ -78,7 +78,7 @@ public class LinphoneService extends Service {
                     Toast.makeText(LinphoneService.this, "Incoming call received, answering it automatically", Toast.LENGTH_LONG).show();
                     // For this sample we will automatically answer incoming calls
                     CallParams params = getCore().createCallParams(call);
-                    params.enableVideo(true);
+                    params.enableVideo(false);
                     call.acceptWithParams(params);
                 } else if (state == Call.State.Connected) {
                     // This stats means the call has been established, let's start the call activity
@@ -86,8 +86,6 @@ public class LinphoneService extends Service {
                     // As it is the Service that is starting the activity, we have to give this flag
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
-
-
                 }
             }
         };

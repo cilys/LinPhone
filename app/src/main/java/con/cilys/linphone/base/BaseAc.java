@@ -43,6 +43,8 @@ public class BaseAc extends Activity implements EventImpl {
     }
 
     public void onTriggerOnMainThread(int type) {
-
+        if (type == EventImpl.CLOSE_ALL_ACTIVITY) {
+            finish();
+        }
     }
 }

@@ -44,7 +44,7 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".CallActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleInstance"
             android:noHistory="true"
             android:resizeableActivity="true"
             android:supportsPictureInPicture="true"
